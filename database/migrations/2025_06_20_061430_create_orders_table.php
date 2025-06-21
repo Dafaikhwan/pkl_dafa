@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('ordercode')->unique();
             $table->integer('total_price');
             $table->enum('status',['pending','cancel','success']);
-            $table->foreign('user_id')->references('id')->on('users ');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
 

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // <-- TAMBAH INI
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Buat middleware auth agar hanya user login yang bisa akses
      */
     public function __construct()
     {
@@ -17,12 +16,16 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * Tampilkan dashboard berdasarkan role user
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user(); // Ambil user yang sedang login
+
+        if ($user->isAdmin == 1) {
+            return redirect('admin'); // Kalau admin, redirect ke /admin
+        } else {
+            return view('home'); // Kalau member biasa, tampilkan view home
+        }
     }
 }
