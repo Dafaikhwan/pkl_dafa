@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\productController;
 
 
 Route::get('/', function () {
@@ -64,6 +66,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 use App\Http\Middleware\Admin;
 Route::group(['prefix'=>'admin','middleware'=>['auth' , Admin::class]],function(){
     Route::get('/',[BackendController::class,'index']);
-        
+    Route::resource('/category', CategoryController::class);
+    Route::resource('/product', ProductController::class);
+
     
 });
+

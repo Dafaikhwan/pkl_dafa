@@ -567,3 +567,15 @@
           </div>
         </div>
 @endsection
+
+@section('content')
+<link rel="stylesheet" href="{{asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" />
+@endsection
+
+
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js')}}"></script>
+<script src="{{asset('assets/backend/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/datatable/datatable-basic.init.js')}}"></script>
+@endpush
