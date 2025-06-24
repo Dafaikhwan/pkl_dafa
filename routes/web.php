@@ -5,38 +5,43 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\productController;
+use App\Http\Controllers\FrontendController;
+
+Route::get('/',[FrontendController::class,'index']);
+Route::get('/about',[FrontendController::class,'about']);
+Route::get('/product',[FrontendController::class,'product']);
+Route::get('/cart',[FrontendController::class,'cart']);
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('about', function () {
-    return 'ini halaman about';
-});
-Route::get('profile', function () {
-    return view('profile');
-});
 
-Route::get('produk/{namaProduk}',function ($a){
-    return 'saya membeli <b>'.$a . '</b>';
-});
 
-Route::get('beli/{barang}/{jumlah}',function ($a,$b){
-    return view('beli', compact('a','b'));
-});
+// Route::get('about', function () {
+//     return 'ini halaman about';
+// });
+// Route::get('profile', function () {
+//     return view('profile');
+// });
 
-Route::get('beli/{barang}/{jumlah}',function ($a,$b){
-    return view('beli', compact('a','b'));
-});
-Route::get('kategori/{namaKategori?}',function ($nama=null){
-    if ($nama) {
-        return 'anda memilih kategori:' . $nama;
-    }else{
-        return 'anda belum memilih kategori:';
-    }
+// Route::get('produk/{namaProduk}',function ($a){
+//     return 'saya membeli <b>'.$a . '</b>';
+// });
+
+// Route::get('beli/{barang}/{jumlah}',function ($a,$b){
+//     return view('beli', compact('a','b'));
+// });
+
+// Route::get('beli/{barang}/{jumlah}',function ($a,$b){
+//     return view('beli', compact('a','b'));
+// });
+// Route::get('kategori/{namaKategori?}',function ($nama=null){
+//     if ($nama) {
+//         return 'anda memilih kategori:' . $nama;
+//     }else{
+//         return 'anda belum memilih kategori:';
+//     }
     
-});
+// });
 
 Route::get('/promo/{barang?}/{kode?}', function ($barang = null, $kode = null) {
     if ($barang && $kode) {
