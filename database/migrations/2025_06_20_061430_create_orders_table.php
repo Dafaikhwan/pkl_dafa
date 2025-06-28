@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('ordercode')->unique();
+            $table->string('order_code')->unique();
             $table->integer('total_price');
             $table->enum('status',['pending','cancel','success']);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
 
-        Schema::create('orders_product', function (Blueprint $table) {
+        Schema::create('order_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');

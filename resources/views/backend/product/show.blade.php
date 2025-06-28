@@ -54,12 +54,12 @@
                     </div>
 
                     <div class="mt-4 d-flex justify-content-between">
-                        <a href="{{ route('product.index') }}" class="btn btn-sm btn-secondary">
+                        <a href="{{ route('backend.product.index') }}" class="btn btn-sm btn-secondary">
                             <i class="fas fa-arrow-left"></i> Kembali
                         </a>
 
                         {{-- Tombol Delete --}}
-                        <form action="{{ route('product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                        <form action="{{ route('backend.product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

@@ -45,7 +45,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name,'-');
         $category->save();
         toast('data berhasil disimpan','succes');
-        return redirect()->route('category.index');
+        return redirect()->route('backend.category.index');
        
     }
 
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name,'-');
         $category->save();
         toast('data berhasil disimpan','succes');
-        return redirect()->route('category.index');
+        return redirect()->route('backend.category.index');
     }
 
     /**
@@ -92,6 +92,6 @@ class CategoryController extends Controller
         $category= Category::findOrfail($id);
         $category->delete();
         toast('data berhasil dihapus','succes');
-        return redirect()->route('category.index');
+        return redirect()->route('backend.category.index');
     }
 }
