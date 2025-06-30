@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jadwal Pemeriksaan UKS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <style>
+    html.dark { background-color: #1e293b; color: white; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center px-6 py-4">
+    <h1 class="text-3xl font-bold text-indigo-700 dark:text-white">🩺 Jadwal Pemeriksaan UKS</h1>
+    <button onclick="document.documentElement.classList.toggle('dark')" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-800">
+      Toggle Dark Mode
+    </button>
+  </div>
+
+  <!-- Filter -->
+  <div class="flex gap-4 px-6 pb-4 flex-wrap">
+    <div>
+      <label for="kelasFilter" class="block mb-1 text-sm font-medium text-gray-700 dark:text-white">Filter Kelas</label>
+      <select id="kelasFilter" onchange="filterTable()" class="p-2 rounded border-gray-300 dark:bg-gray-700 dark:text-white">
+        <option value="semua">Semua Kelas</option>
+        <option value="X">X</option>
+        <option value="XI">XI</option>
+        <option value="XII">XII</option>
+      </select>
+    </div>
+    <div>
+      <label for="jurusanFilter" class="block mb-1 text-sm font-medium text-gray-700 dark:text-white">Filter Jurusan</label>
+      <select id="jurusanFilter" onchange="filterTable()" class="p-2 rounded border-gray-300 dark:bg-gray-700 dark:text-white">
+        <option value="semua">Semua Jurusan</option>
+        <option value="RPL">RPL</option>
+        <option value="TSM">TSM</option>
+        <option value="TKR">TKR</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tabel -->
+  <div class="container mx-auto px-4 pb-8" data-aos="fade-up">
+    <div class="overflow-x-auto shadow-lg rounded-lg bg-white dark:bg-gray-800">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-indigo-500 text-white">
+          <tr>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Tanggal</th>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Jam</th>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Kelas</th>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Jurusan</th>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Jenis Pemeriksaan</th>
+            <th class="px-4 py-3 text-left text-sm font-bold uppercase">Petugas</th>
+          </tr>
+        </thead>
+        <tbody id="jadwalBody" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+          <tr data-kelas="X" data-jurusan="RPL">
+            <td class="px-4 py-4">01 Juli 2025</td>
+            <td class="px-4 py-4">08:00 - 09:30</td>
+            <td class="px-4 py-4">X</td>
+            <td class="px-4 py-4">RPL</td>
+            <td class="px-4 py-4">Pemeriksaan Gigi</td>
+            <td class="px-4 py-4">Drg. Lestari</td>
+          </tr>
+          <tr data-kelas="XI" data-jurusan="TSM">
+            <td class="px-4 py-4">01 Juli 2025</td>
+            <td class="px-4 py-4">09:30 - 11:00</td>
+            <td class="px-4 py-4">XI</td>
+            <td class="px-4 py-4">TSM</td>
+            <td class="px-4 py-4">Pemeriksaan Umum</td>
+            <td class="px-4 py-4">Dr. Rizky</td>
+          </tr>
+          <tr data-kelas="XII" data-jurusan="TKR">
+            <td class="px-4 py-4">02 Juli 2025</td>
+            <td class="px-4 py-4">10:00 - 11:30</td>
+            <td class="px-4 py-4">XII</td>
+            <td class="px-4 py-4">TKR</td>
+            <td class="px-4 py-4">Pemeriksaan Mata</td>
+            <td class="px-4 py-4">Dr. Lina</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tombol Admin -->
+  <div class="flex justify-end px-6 pb-6">
+    <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 shadow">
+      + Tambah Jadwal
+    </button>
+  </div>
+
+  <!-- Script -->
+  <script>
+    AOS.init();
+
+    function filterTable() {
+      const kelas = document.getElementById("kelasFilter").value;
+      const jurusan = document.getElementById("jurusanFilter").value;
+      const rows = document.querySelectorAll("#jadwalBody tr");
+
+      rows.forEach(row => {
+        const rowKelas = row.getAttribute("data-kelas");
+        const rowJurusan = row.getAttribute("data-jurusan");
+
+        const kelasMatch = (kelas === "semua" || rowKelas === kelas);
+        const jurusanMatch = (jurusan === "semua" || rowJurusan === jurusan);
+
+        row.style.display = (kelasMatch && jurusanMatch) ? "" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
